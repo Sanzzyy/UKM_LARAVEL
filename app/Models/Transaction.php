@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Transaction extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'transaction_code',
+        'user_id',
+        'customer_id',
+        'total_amount',
+        'paid_amount',
+        'change_amount',
+        'payment_method',
+    ];
+
+    // =====================
+    // RELATIONSHIPS
+    // =====================
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
+    public function transactionDetails()
+    {
+        return $this->hasMany(TransactionDetail::class);
+    }
+}
